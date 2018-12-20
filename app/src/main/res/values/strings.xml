@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Food Delivery Service</string>
+    <string name="profile">Profile</string>
+    <string name="favourites">Favourites</string>
+    <string name="orders">Orders</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
