@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "95905729819",
+    "firebase_url": "https://fooddeliveryservice-addf3.firebaseio.com",
+    "project_id": "fooddeliveryservice-addf3",
+    "storage_bucket": "fooddeliveryservice-addf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95905729819:android:4dab197c99334c07",
+        "android_client_info": {
+          "package_name": "e.acer_aspire.fooddeliveryservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95905729819-7689qejdadd4lsga30mjpq54nl930o16.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "e.acer_aspire.fooddeliveryservice",
+            "certificate_hash": "e9386206a6e095bec9729cceedde23c9e07b40b2"
+          }
+        },
+        {
+          "client_id": "95905729819-uu9omjf33950u7n4vmi2fpr922ngscnj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7BK9KjtppbhN0aBy4xaz7reA0dSL9RL8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95905729819-uu9omjf33950u7n4vmi2fpr922ngscnj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
