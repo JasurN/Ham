@@ -1,4 +1,4 @@
-package e.acer_aspire.fooddeliveryservice.fragments;
+package e.acer_aspire.fooddeliveryservice.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
