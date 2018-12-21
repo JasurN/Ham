@@ -76,14 +76,9 @@ public class LoginActivity extends AppCompatActivity {
 
         _loginButton.setEnabled(false);
 
-
-
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
         loginFirebase(email, password);
-        // TODO: Implement your own authentication logic here.
-
-
     }
 
 
@@ -118,14 +113,19 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void sendEmailToParentActivity() {
+        Intent resultEmail = new Intent();
+        setResult(RESULT_OK,  resultEmail);
+
+        // By default we just finish the Activity and log them in automatically
+        this.finish();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
-                this.finish();
+                sendEmailToParentActivity();
             }
         }
     }
@@ -138,10 +138,12 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        finish();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            sendEmailToParentActivity();
+        }
+
     }
-
-
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
@@ -182,7 +184,6 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
                             delay(true);
                         } else {
                             // If sign in fails, display a message to the user.
