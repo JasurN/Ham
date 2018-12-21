@@ -1,6 +1,6 @@
 package e.acer_aspire.fooddeliveryservice.models;
 
-import android.media.Rating;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class User {
 
@@ -67,5 +67,11 @@ public class User {
 
     public Orders getOrders() {
         return orders;
+    }
+
+    public void userSignOut() {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            FirebaseAuth.getInstance().signOut();
+        }
     }
 }
