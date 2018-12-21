@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                             // onLoginFailed();
                             progressDialog.dismiss();
                         }
-                    }, 3000);
+                    }, 500);
 
         } else {
             new android.os.Handler().postDelayed(
@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                              onLoginFailed();
                             progressDialog.dismiss();
                         }
-                    }, 3000);
+                    }, 500);
         }
 
     }

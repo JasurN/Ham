@@ -6,19 +6,14 @@ package e.acer_aspire.fooddeliveryservice;
  * contributed by Jasurbek Nabijonov
  */
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -26,7 +21,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import e.acer_aspire.fooddeliveryservice.adapters.ViewPagerAdapter;
 import e.acer_aspire.fooddeliveryservice.fragments.MainFragment;
@@ -39,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = "myLogs";
 
     // For DrawerLayout which is in activity_main
-    @Bind(R.id.nav_view) NavigationView navView;
+    @BindView(R.id.nav_view) NavigationView navView;
     // For Navigation view
-    @Bind(R.id.main_drawer_layout) DrawerLayout drawerLayout;
+    @BindView(R.id.main_drawer_layout) DrawerLayout drawerLayout;
     // For View pager (used to swap between bottom navigation view)
 //    @Bind(R.id.tab_toolbar) Toolbar mToolBar;
     // Bottom navigation view which is used to change fragments like main, menu, orders and profile
-    @Bind(R.id.main_navigation) BottomNavigationView bottomNavigationView;
+    @BindView(R.id.main_navigation) BottomNavigationView bottomNavigationView;
     private static final int REQUEST_LOGIN = 1;
 
     @Override
@@ -53,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        makeLoginOrSignUp();
         // Bind all attributes with resource ids
         ButterKnife.bind(this);
 
@@ -61,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
      * Initialization function which configures view
      * and set necessary parameters
      */
-        makeLoginOrSignUp();
+
     }
 
 
@@ -144,6 +140,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Going to Login Activity
+     * User should be initialized in order to use application
+     * @onActivityResult function checks it
+     */
     private void makeLoginOrSignUp() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivityForResult(intent, REQUEST_LOGIN);
