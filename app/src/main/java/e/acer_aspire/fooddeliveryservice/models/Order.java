@@ -12,7 +12,12 @@ public class Order {
     private float amount;
     private String destination_address;
     private int status; //see Defined_Values.java in helper package for statuses
-    private Map created_at;
+    private Map <String, Object> created_at;
+
+    //Empty constructor used when retrieving from database
+    public Order() {
+
+    }
 
     public Order(String id, String meal_id, String user_id,
                  float amount, String destination_address,

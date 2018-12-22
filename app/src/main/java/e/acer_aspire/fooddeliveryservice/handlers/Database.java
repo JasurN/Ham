@@ -1,15 +1,20 @@
 package e.acer_aspire.fooddeliveryservice.handlers;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import e.acer_aspire.fooddeliveryservice.models.Meal;
 import e.acer_aspire.fooddeliveryservice.models.Order;
 import e.acer_aspire.fooddeliveryservice.models.Profile;
@@ -18,6 +23,7 @@ import e.acer_aspire.fooddeliveryservice.models.User;
 public class Database {
     private DatabaseReference mDatabase;
     private ArrayList<Meal> mealsArrayList;
+    private ArrayList<Order> ordersArrayList;
 
     public Database() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -26,6 +32,8 @@ public class Database {
 
     /**
      * Creating new user in database. it inserts data to both user and profile places
+     *
+     * @in new user params
      */
     public void signUpNewUser(String email, int type, String name, String address, String phoneNumber) {
         String user_id = mDatabase.child("users").push().getKey();
@@ -48,6 +56,8 @@ public class Database {
 
     /**
      * Inserting new meals to FireBase
+     *
+     * @in meal params
      */
 
     public void insertNewMeal(String name, String description, String ingredients,
@@ -66,13 +76,15 @@ public class Database {
 
     /**
      * Making order from user and sending it to database
+     *
+     * @in order params
      */
 
     public void makeOrder(String meal_id, String user_id,
                           float amount, String destination_address) {
         String order_id = mDatabase.child("orders").push().getKey();
 
-        //creating current timestamp for new user
+        //creating current timestamp for new usercode
         Map<String, Object> created_at = new HashMap<>();
         created_at.put("timestamp", ServerValue.TIMESTAMP);
 
@@ -86,8 +98,9 @@ public class Database {
     }
 
     /**
-        Retrieving all meals from database to show it to user
-        @return ArrayList with Meal. Further its elements can be accessed with getters
+     * Retrieving all meals from database to show it to user
+     *
+     * @return ArrayList with Meal class. Further its elements can be accessed with getters
      */
     public ArrayList<Meal> getAllMeals() {
         DatabaseReference data = FirebaseDatabase.getInstance().getReference().child("meals");
@@ -102,6 +115,7 @@ public class Database {
                     mealsArrayList.add(note);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -110,5 +124,32 @@ public class Database {
         return mealsArrayList;
     }
 
+    /**
+     * Retrieve Orders with given status
+     *
+     * @return ArrayList with Order class.
+     * @in Status for order see  Defined_Values.java in /helper package
+     */
+    public ArrayList<Order> getOrderByStatus(int status) {
+        ordersArrayList = new ArrayList<>();
 
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+        Query query = dbRef.child("orders").orderByChild("status").equalTo(status); //query for status
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot orderDataSnapshot : dataSnapshot.getChildren()) {
+                    Order tempOrder = orderDataSnapshot.getValue(Order.class);
+                    Log.d("ORDER INFO", tempOrder.getMeal_id());
+                    ordersArrayList.add(tempOrder);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return ordersArrayList;
+    }
 }

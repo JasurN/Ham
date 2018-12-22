@@ -12,6 +12,11 @@ public class User {
     private int type; //see Defined_Values.java in helper package for user types
     private Map created_at;
 
+    //Empty constructor used when retrieving from database
+    public User() {
+
+    }
+
     public User(String id, String email, int type, Map created_at) {
         this.id = id;
         this.email = email;

@@ -64,16 +64,16 @@ public class MainActivity extends AppCompatActivity {
          * and set necessary parameters
          */
         init();
-       // test();
     }
 
     //TODO: Delete test function before publish
     private void test() {
 
         Database database = new Database();
-        database.getAllMeals();
-        //testAddMeal("plov", "some info", "pls", 13000);
-        //testAddMeal("somsa", "some info", "p1ls", 12000);
+        database.getOrderByStatus(0);
+//        database.getAllMeals();
+//        //testAddMeal("plov", "some info", "pls", 13000);
+//        //testAddMeal("somsa", "some info", "p1ls", 12000);
     }
 
     private void testAddMeal(String name, String description, String ingredients, float price) {

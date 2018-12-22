@@ -13,6 +13,7 @@ public class Meal {
     private float rating;
     private float price;
 
+    //Empty constructor used when retrieving from database
     public Meal() {
 
     }
