@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import e.acer_aspire.fooddeliveryservice.database.FirebaseDatabaseHandler;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
@@ -86,12 +87,13 @@ public class SignupActivity extends AppCompatActivity {
         String name = _nameText.getText().toString();
         String address = _addressText.getText().toString();
         String email = _emailText.getText().toString();
-        String mobile = _mobileText.getText().toString();
+        String phoneNumber = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Database setup for user
-        signUpFirebase(email, password);
-
+        signUpFirebaseAuth(email, password);
+        FirebaseDatabaseHandler firebaseDatabaseHandler = new FirebaseDatabaseHandler();
+        firebaseDatabaseHandler.signUpNewUser(email, 1, name, address, phoneNumber);
+        //TODO: create admin user how?
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -150,7 +152,7 @@ public class SignupActivity extends AppCompatActivity {
             _emailText.setError(null);
         }
 
-        if (mobile.isEmpty() || mobile.length() > 10) {
+        if (mobile.isEmpty() || mobile.length() < 6) {
             _mobileText.setError("Enter Valid Mobile Number");
             valid = false;
         } else {
@@ -174,7 +176,7 @@ public class SignupActivity extends AppCompatActivity {
         return valid;
     }
 
-    private void signUpFirebase(final String user_email, String password) {
+    private void signUpFirebaseAuth(final String user_email, String password) {
         mAuth.createUserWithEmailAndPassword(user_email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
