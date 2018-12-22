@@ -47,7 +47,7 @@ public class UserFirebase {
         return created_at;
     }
 
-    public void setCreated_at(Map<String, String> created_at) {
+    public void setCreated_at(Map created_at) {
         this.created_at = created_at;
     }
 
