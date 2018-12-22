@@ -35,7 +35,7 @@ public class DatabaseHandler {
 
     public void insertNewMeal(String name, String description, String ingredients,
                               float price) {
-        String meal_id = mDatabase.child("meal").push().getKey();
+        String meal_id = mDatabase.child("meals").push().getKey();
 
         MealFirebase mealFirebase = new MealFirebase(meal_id, name, description,
                 ingredients, price);
@@ -45,5 +45,22 @@ public class DatabaseHandler {
 
         mDatabase.updateChildren(childUpdates);
 
+    }
+
+    public void makeOrder(String meal_id, String user_id,
+                          float amount, String destination_address) {
+        String order_id = mDatabase.child("orders").push().getKey();
+
+        //creating current timestamp for new user
+        Map<String, Map<String, String>> created_at = new HashMap<>();
+        created_at.put("timestamp", ServerValue.TIMESTAMP);
+
+        OrderFirebase orderFirebase = new OrderFirebase(order_id, meal_id, user_id,
+                amount, destination_address, 0, created_at);
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/orders/" + order_id, orderFirebase.toMap());
+
+        mDatabase.updateChildren(childUpdates);
     }
 }

@@ -9,7 +9,7 @@ public class UserFirebase {
 
     private String id;
     private String email;
-    private int type; //0 for admin; 1 for user
+    private int type; //see Defined_Values.java in helper package for user types
     private Map created_at;
 
     public UserFirebase(String id, String email, int type, Map created_at) {

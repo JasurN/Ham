@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import e.acer_aspire.fooddeliveryservice.adapters.ViewPagerAdapter;
+import e.acer_aspire.fooddeliveryservice.database.DatabaseHandler;
 import e.acer_aspire.fooddeliveryservice.fragments.MainFragment;
 import e.acer_aspire.fooddeliveryservice.fragments.MenuFragment;
 import e.acer_aspire.fooddeliveryservice.fragments.OrdersFragment;
@@ -52,15 +53,20 @@ public class MainActivity extends AppCompatActivity {
         // Bind all attributes with resource ids
         ButterKnife.bind(this);
 
+        /**
+         * Initialization function which configures view
+         * and set necessary parameters
+         */
         init();
-    /**
-     * Initialization function which configures view
-     * and set necessary parameters
-     */
+
 
     }
-
-
+    //TODO: Delete test function before publish
+    private void test() {
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+        databaseHandler.makeOrder("321", "123", 2,
+                "sebzor");
+    }
 
     private void init() {
         /*  Sets action bar to the app,
@@ -143,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Going to Login Activity
      * User should be initialized in order to use application
-     * @onActivityResult function checks it
+     * onActivityResult function checks it
      */
     private void makeLoginOrSignUp() {
         Intent intent = new Intent(this, LoginActivity.class);
