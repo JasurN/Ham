@@ -7,10 +7,10 @@ import com.google.firebase.database.ServerValue;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FirebaseDatabaseHandler {
+public class DatabaseHandler {
     private DatabaseReference mDatabase;
 
-    public FirebaseDatabaseHandler() {
+    public DatabaseHandler() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
@@ -27,5 +27,9 @@ public class FirebaseDatabaseHandler {
         childUpdates.put("/profiles/" + user_id, profileFirebase.toMap());
 
         mDatabase.updateChildren(childUpdates);
+    }
+
+    public void insertNewMeal() {
+
     }
 }
