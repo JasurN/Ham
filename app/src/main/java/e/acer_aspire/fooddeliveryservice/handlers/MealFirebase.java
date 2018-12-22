@@ -13,6 +13,10 @@ public class MealFirebase {
     private float rating;
     private float price;
 
+    public MealFirebase() {
+
+    }
+
     public MealFirebase(String id,String name, String description, String ingredients, float price) {
         this.id = id;
         this.name = name;

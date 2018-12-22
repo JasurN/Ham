@@ -1,24 +1,34 @@
 package e.acer_aspire.fooddeliveryservice.handlers;
 
+import android.support.annotation.NonNull;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DatabaseHandler {
+public class Database {
     private DatabaseReference mDatabase;
+    private ArrayList<MealFirebase> mealsArrayList;
 
-    public DatabaseHandler() {
+    public Database() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
+
+    /**
+     * Creating new user in database. it inserts data to both user and profile places
+     */
     public void signUpNewUser(String email, int type, String name, String address, String phoneNumber) {
         String user_id = mDatabase.child("users").push().getKey();
 
         //creating current timestamp for new user
-        Map<String, Map<String, String>> created_at = new HashMap<>();
+        Map<String, Object> created_at = new HashMap<>();
         created_at.put("timestamp", ServerValue.TIMESTAMP);
 
 
@@ -47,12 +57,16 @@ public class DatabaseHandler {
 
     }
 
+    /**
+     * Making order from user and sending it to database
+     */
+
     public void makeOrder(String meal_id, String user_id,
                           float amount, String destination_address) {
         String order_id = mDatabase.child("orders").push().getKey();
 
         //creating current timestamp for new user
-        Map<String, Map<String, String>> created_at = new HashMap<>();
+        Map<String, Object> created_at = new HashMap<>();
         created_at.put("timestamp", ServerValue.TIMESTAMP);
 
         OrderFirebase orderFirebase = new OrderFirebase(order_id, meal_id, user_id,
@@ -62,5 +76,30 @@ public class DatabaseHandler {
         childUpdates.put("/orders/" + order_id, orderFirebase.toMap());
 
         mDatabase.updateChildren(childUpdates);
+    }
+
+    /**
+        Retrieving all meals from database to show it to user
+        @return ArrayList with MealFirebase. Further its elements can be accessed with getters
+     */
+    public ArrayList<MealFirebase> getAllMeals() {
+        DatabaseReference data = FirebaseDatabase.getInstance().getReference().child("meals");
+
+        mealsArrayList = new ArrayList<>();
+
+        data.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot mealsDataSnapshot : dataSnapshot.getChildren()) {
+                    MealFirebase note = mealsDataSnapshot.getValue(MealFirebase.class);
+                    mealsArrayList.add(note);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return mealsArrayList;
     }
 }

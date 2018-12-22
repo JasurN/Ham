@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import e.acer_aspire.fooddeliveryservice.handlers.DatabaseHandler;
+import e.acer_aspire.fooddeliveryservice.handlers.Database;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
@@ -91,8 +91,8 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         signUpFirebaseAuth(email, password);
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        databaseHandler.signUpNewUser(email, 1, name, address, phoneNumber);
+        Database database = new Database();
+        database.signUpNewUser(email, 1, name, address, phoneNumber);
         //TODO: create admin user how?
         new android.os.Handler().postDelayed(
                 new Runnable() {

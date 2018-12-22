@@ -8,12 +8,14 @@ package e.acer_aspire.fooddeliveryservice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -24,24 +26,28 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import e.acer_aspire.fooddeliveryservice.adapters.ViewPagerAdapter;
-import e.acer_aspire.fooddeliveryservice.handlers.DatabaseHandler;
+import e.acer_aspire.fooddeliveryservice.handlers.Database;
 import e.acer_aspire.fooddeliveryservice.fragments.MainFragment;
 import e.acer_aspire.fooddeliveryservice.fragments.MenuFragment;
 import e.acer_aspire.fooddeliveryservice.fragments.OrdersFragment;
 import e.acer_aspire.fooddeliveryservice.fragments.ProfileFragment;
+import e.acer_aspire.fooddeliveryservice.handlers.Time;
 
 public class MainActivity extends AppCompatActivity {
     // For managing logs
     private final String TAG = "myLogs";
 
     // For DrawerLayout which is in activity_main
-    @BindView(R.id.nav_view) NavigationView navView;
+    @BindView(R.id.nav_view)
+    NavigationView navView;
     // For Navigation view
-    @BindView(R.id.main_drawer_layout) DrawerLayout drawerLayout;
+    @BindView(R.id.main_drawer_layout)
+    DrawerLayout drawerLayout;
     // For View pager (used to swap between bottom navigation view)
 //    @Bind(R.id.tab_toolbar) Toolbar mToolBar;
     // Bottom navigation view which is used to change fragments like main, menu, orders and profile
-    @BindView(R.id.main_navigation) BottomNavigationView bottomNavigationView;
+    @BindView(R.id.main_navigation)
+    BottomNavigationView bottomNavigationView;
     private static final int REQUEST_LOGIN = 1;
 
     @Override
@@ -58,15 +64,23 @@ public class MainActivity extends AppCompatActivity {
          * and set necessary parameters
          */
         init();
-
-
+       // test();
     }
+
     //TODO: Delete test function before publish
     private void test() {
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        databaseHandler.makeOrder("321", "123", 2,
-                "sebzor");
+
+        Database database = new Database();
+        database.getAllMeals();
+        //testAddMeal("plov", "some info", "pls", 13000);
+        //testAddMeal("somsa", "some info", "p1ls", 12000);
     }
+
+    private void testAddMeal(String name, String description, String ingredients, float price) {
+        Database database = new Database();
+        database.insertNewMeal(name, description, ingredients, price);
+    }
+    //delete untill here
 
     private void init() {
         /*  Sets action bar to the app,
@@ -129,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Function to take action when chosen navigation view
+     *
      * @param navigationView NavigationView
      */
     private void setupDrawerContent(NavigationView navigationView) {
