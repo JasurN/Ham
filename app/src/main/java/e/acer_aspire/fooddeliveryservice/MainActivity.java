@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +43,14 @@ public class MainActivity extends AppCompatActivity {
 //    @Bind(R.id.tab_toolbar) Toolbar mToolBar;
     // Bottom navigation view which is used to change fragments like main, menu, orders and profile
     @BindView(R.id.main_navigation) BottomNavigationView bottomNavigationView;
+
     private static final int REQUEST_LOGIN = 1;
+    private final Fragment mainFragment = new MainFragment();
+    private final Fragment menuFragment = new MenuFragment();
+    private final Fragment ordersFragment = new OrdersFragment();
+    private final Fragment profileFragment = new ProfileFragment();
+    private final FragmentManager fm = getSupportFragmentManager();
+    private Fragment active;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         init();
+        setupFragments();
     /**
      * Initialization function which configures view
      * and set necessary parameters
@@ -73,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }*/
-
+        /** If Navigation view is not drawn
+         *  then draw, else do not draw
+         */
         if (navView != null) {
             setupDrawerContent(navView);
         }
@@ -82,18 +94,6 @@ public class MainActivity extends AppCompatActivity {
 //        bottomNavigationView.
 
     }
-
-    ////////////////////////////////////////////////////// View Pager
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new MainFragment(), "Main");
-        adapter.addFrag(new MenuFragment(), "Menu");
-        adapter.addFrag(new OrdersFragment(), "Orders");
-        adapter.addFrag(new ProfileFragment(), "Profile");
-        viewPager.setAdapter(adapter);
-    }
-
-    //////////////////////////////////////////////////////
 
 
     ////////////////////////////////////////////////////// Navigation View
@@ -104,15 +104,23 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.nav_main:
+                    fm.beginTransaction().hide(active).show(mainFragment).commit();
+                    active = mainFragment;
                     Toast.makeText(MainActivity.this, "Navigation Main", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.nav_menu:
+                    fm.beginTransaction().hide(active).show(menuFragment).commit();
+                    active = menuFragment;
                     Toast.makeText(MainActivity.this, "Navigation Menu", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.nav_orders:
+                    fm.beginTransaction().hide(active).show(ordersFragment).commit();
+                    active = ordersFragment;
                     Toast.makeText(MainActivity.this, "Navigation Orders", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.nav_profile:
+                    fm.beginTransaction().hide(active).show(profileFragment).commit();
+                    active = profileFragment;
                     Toast.makeText(MainActivity.this, "Navigation Profile", Toast.LENGTH_SHORT).show();
                     return true;
             }
@@ -120,6 +128,15 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Adds fragment to the fragment manager
+     */
+    private void setupFragments() {
+        fm.beginTransaction().add(R.id.main_content_list, mainFragment, "Main").commit();
+        fm.beginTransaction().add(R.id.main_content_list, menuFragment, "Menu").hide(menuFragment).commit();
+        fm.beginTransaction().add(R.id.main_content_list, ordersFragment, "Orders").hide(ordersFragment).commit();
+        fm.beginTransaction().add(R.id.main_content_list, profileFragment, "Profile").hide(profileFragment).commit();
+    }
 
     /**
      * Function to take action when chosen navigation view

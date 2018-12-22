@@ -10,8 +10,9 @@ public class Meals {
     private int restaurant_id;
 
     private Restaurants restaurant;
+    private Reviews review;
 
-    public Meals(int id, String name, String description, String ingredients, float price, int restaurant_id, Restaurants restaurant) {
+    public Meals(int id, String name, String description, String ingredients, float price, int restaurant_id, Restaurants restaurant, Reviews review) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -19,6 +20,7 @@ public class Meals {
         this.price = price;
         this.restaurant_id = restaurant_id;
         this.restaurant = restaurant;
+        this.review = review;
     }
 
     public int getId() {
@@ -37,8 +39,8 @@ public class Meals {
         return ingredients;
     }
 
-    public float getPrice() {
-        return price;
+    public String getPrice() {
+        return price + " sum";
     }
 
     public int getRestaurantId() {
@@ -47,5 +49,13 @@ public class Meals {
 
     public Restaurants getRestaurant() {
         return restaurant;
+    }
+
+    public Reviews getReview() {
+        return review;
+    }
+
+    public String getNamePrice() {
+        return getName() + " - " + getPrice() + " sum";
     }
 }

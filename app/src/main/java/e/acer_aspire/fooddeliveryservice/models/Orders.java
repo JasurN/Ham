@@ -6,11 +6,14 @@ public class Orders {
     private int meal_id;
     private float amount;
     private String destination;
-    private int time;
+    private String time;
     private int arrived_at;
     private int status;
 
-    public Orders(int id, int user_id, int meal_id, float amount, String destination, int time, int arrived_at, int status) {
+    private User user;
+    private Meals meal;
+
+    public Orders(int id, int user_id, int meal_id, float amount, String destination, String time, int arrived_at, int status, User user, Meals meal) {
         this.id = id;
         this.user_id = user_id;
         this.meal_id = meal_id;
@@ -19,17 +22,19 @@ public class Orders {
         this.time = time;
         this.arrived_at = arrived_at;
         this.status = status;
+        this.user = user;
+        this.meal = meal;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getUser_id() {
+    public int getUserId() {
         return user_id;
     }
 
-    public int getMeal_id() {
+    public int getMealId() {
         return meal_id;
     }
 
@@ -41,15 +46,23 @@ public class Orders {
         return destination;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public int getArrived_at() {
+    public int getArrivedAt() {
         return arrived_at;
     }
 
     public int getStatus() {
         return status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Meals getMeal() {
+        return meal;
     }
 }
