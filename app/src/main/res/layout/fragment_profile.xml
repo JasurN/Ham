@@ -149,7 +149,7 @@
             android:id="@+id/fragment_profile_signout"
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
-            android:text="sign_out"
+            android:text="@string/sign_out"
             android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
