@@ -144,7 +144,8 @@
         <ImageView
             app:srcCompat="@drawable/ic_exit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:onClick="signOutOnClick"/>
         <TextView
             android:id="@+id/fragment_profile_signout"
             android:layout_marginTop="10dp"
@@ -152,7 +153,8 @@
             android:text="@string/sign_out"
             android:textSize="18sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:onClick="signOutOnClick"/>
     </LinearLayout>
 
 
