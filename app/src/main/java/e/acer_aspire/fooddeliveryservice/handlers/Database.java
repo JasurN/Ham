@@ -145,11 +145,38 @@ public class Database {
                     ordersArrayList.add(tempOrder);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
         return ordersArrayList;
+    }
+
+    private Profile profile;
+
+    /**
+     * Retrieve user Profile info with user_id
+     */
+    public Profile getPersonByEmail(String user_id) {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+        Query query = dbRef.child("profiles").orderByChild(user_id).equalTo(user_id); //query for status
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot orderDataSnapshot : dataSnapshot.getChildren()) {
+                    profile = orderDataSnapshot.getValue(Profile.class);
+                    Log.d("ORDER INFO", profile.getName());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return profile;
     }
 }
