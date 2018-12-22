@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/orders_content_item"
+    android:layout_width="match_parent"
+    android:layout_height="185dp"
+    card:cardCornerRadius="15dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/view_fragment_orders_top"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:text="Meal name:"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:layout_alignTop="@+id/view_fragment_orders_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="@string/price"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="@string/amount"
+                    android:layout_marginTop="2dp"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="@string/total_price"
+                    android:layout_marginTop="2dp"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="@string/date"
+                    android:layout_marginTop="2dp"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RatingBar
+                    android:id="@+id/orders_meal_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:numStars="5"
+                    android:rating="5"
+                    style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="end"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/view_fragment_orders_price"
+                    android:text="@string/price"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/view_fragment_orders_amount"
+                    android:text="@string/amount"
+                    android:layout_marginTop="2dp"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/view_fragment_orders_total_price"
+                    android:text="@string/total_price"
+                    android:layout_marginTop="2dp"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/view_fragment_orders_date"
+                    android:text="@string/date"
+                    android:layout_marginTop="2dp"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/view_fragment_orders_status"
+            android:translationX="55dp"
+            android:translationY="55dp"
+            android:rotation="45"
+            app:srcCompat="@drawable/shape_order_status"
+            android:tint="@color/waiting"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

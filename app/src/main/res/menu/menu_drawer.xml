@@ -11,13 +11,13 @@
             android:icon="@drawable/ic_favourite_not_filled"
             android:title="@string/favourites" />
         <item
+            android:id="@+id/drawer_nav_meals"
+            android:icon="@drawable/ic_fast_food"
+            android:title="@string/menu" />
+        <item
             android:id="@+id/drawer_nav_order"
             android:icon="@drawable/ic_menu_order"
             android:title="@string/orders" />
-        <item
-            android:id="@+id/drawer_nav_restaurants"
-            android:icon="@drawable/ic_menu_restaurant"
-            android:title="@string/restaurants" />
     </group>
     <item android:title="@string/communicate">
         <menu>
@@ -26,9 +26,13 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/share" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/drawer_nav_send"
                 android:icon="@drawable/ic_menu_send"
                 android:title="@string/send" />
+            <item
+                android:id="@+id/drawer_nav_logout"
+                android:icon="@drawable/ic_menu_exit"
+                android:title="@string/sign_out" />
         </menu>
     </item>
 </menu>

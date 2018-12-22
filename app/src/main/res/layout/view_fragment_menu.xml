@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/menu_content_list"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    card:cardCornerRadius="15dp"
+    app:cardBackgroundColor="@color/fragment_background"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <ImageView
+            android:id="@+id/view_fragment_menu_image"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:contentDescription="Meal Image" />
+
+        <LinearLayout
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="0dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_below="@+id/view_fragment_menu_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/view_fragment_menu_name"
+                    android:text="dasdsadsadsa"
+                    android:textSize="25sp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="dasdsadsadsa"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginTop="15dp"
+                    app:srcCompat="@drawable/ic_favourite_not_filled_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Favourite" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
