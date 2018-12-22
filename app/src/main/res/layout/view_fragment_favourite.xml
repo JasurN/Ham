@@ -7,7 +7,7 @@
     android:id="@+id/main_content_item"
     android:layout_width="match_parent"
     android:layout_height="180dp"
-    card:cardCornerRadius="8dp"
+    card:cardCornerRadius="15dp"
     android:foreground="?android:attr/selectableItemBackground"
     android:padding="20dp"
     android:layout_marginLeft="8dp"

@@ -7,8 +7,12 @@
     android:id="@+id/orders_content_item"
     android:layout_width="match_parent"
     android:layout_height="185dp"
-    card:cardCornerRadius="8dp"
-    android:foreground="?android:attr/selectableItemBackground" >
+    card:cardCornerRadius="15dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp" >
 
     <RelativeLayout
         android:layout_width="match_parent"

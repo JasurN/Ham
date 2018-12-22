@@ -21,5 +21,6 @@
     <color name="waiting">#D5FF00</color>
     <color name="approved">#4F9B03</color>
     <color name="rejected">#D84100</color>
+    <color name="fragment_background">#516276</color>
 
 </resources>
