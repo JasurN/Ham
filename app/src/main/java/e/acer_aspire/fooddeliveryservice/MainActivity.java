@@ -33,20 +33,17 @@ public class MainActivity extends AppCompatActivity {
     // For managing logs
     private final String TAG = "myLogs";
 
-    // For DrawerLayout which is in activity_main
-    @BindView(R.id.nav_view)
-    NavigationView navView;
-    // For Navigation view
+    // For Navigation view which is inside drawer layout
+    @BindView(R.id.nav_view) NavigationView navigationView;
+    // For drawer layout
     @BindView(R.id.main_drawer_layout)
     DrawerLayout drawerLayout;
-    // For View pager (used to swap between bottom navigation view)
-//    @Bind(R.id.tab_toolbar) Toolbar mToolBar;
     // Bottom navigation view which is used to change fragments like main, menu, orders and profile
     @BindView(R.id.main_navigation)
     BottomNavigationView bottomNavigationView;
 
     private static final int REQUEST_LOGIN = 1;
-
+    private final int[] navIndex = {1, 2, 3, 0};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,19 +52,17 @@ public class MainActivity extends AppCompatActivity {
         makeLoginOrSignUp();
         // Bind all attributes with resource ids
         ButterKnife.bind(this);
-        loadFragment(new MenuFragment());
+        loadFragment(new FavouriteFragment());
         /** If Navigation view is not drawn
          *  then draw, else do not draw
          */
-        if (navView != null) {
-            setupDrawerContent(navView);
-        }
+        setupDrawerContent(navigationView);
+        navigationView.getMenu().getItem(navIndex[0]).setChecked(true);
         /** Set item select listener for BottomNavigationView */
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomItemSelected);
     }
 
-    ////////////////////////////////////////////////////// Navigation View
-
+    ////////////////////////////////////////////////////// Bottom Navigation View
     // Click Listener which changes fragments according to position of MenuItem
     private BottomNavigationView.OnNavigationItemSelectedListener bottomItemSelected = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -76,21 +71,26 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.nav_favourites:
                     fragment = new FavouriteFragment();
+                    navigationView.getMenu().getItem(navIndex[0]).setChecked(true);
                     Toast.makeText(MainActivity.this, "Navigation Main", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.nav_menu:
                     fragment = new MenuFragment();
+                    navigationView.getMenu().getItem(navIndex[1]).setChecked(true);
                     Toast.makeText(MainActivity.this, "Navigation Menu", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.nav_orders:
                     fragment = new OrdersFragment();
+                    navigationView.getMenu().getItem(navIndex[2]).setChecked(true);
                     Toast.makeText(MainActivity.this, "Navigation Orders", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.nav_profile:
                     fragment = new ProfileFragment();
+                    navigationView.getMenu().getItem(navIndex[3]).setChecked(true);
                     Toast.makeText(MainActivity.this, "Navigation Profile", Toast.LENGTH_SHORT).show();
                     break;
             }
+            drawerLayout.closeDrawers();
             return loadFragment(fragment);
         }
     };
@@ -114,7 +114,10 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    //////////////////////////////////////////////////////
 
+
+    ////////////////////////////////////////////////////// Navigation View
     /**
      * Function to take action when chosen navigation view
      *
@@ -124,20 +127,24 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment = null;
                 item.setChecked(true);
+                Fragment fragment = null;
                 switch (item.getItemId()) {
                     case R.id.drawer_nav_profile:
                         fragment = new ProfileFragment();
+                        bottomNavigationView.setSelectedItemId(R.id.nav_profile);
                         break;
                     case R.id.drawer_nav_favourite:
                         fragment = new FavouriteFragment();
+                        bottomNavigationView.setSelectedItemId(R.id.nav_favourites);
                         break;
                     case R.id.drawer_nav_meals:
                         fragment = new MenuFragment();
+                        bottomNavigationView.setSelectedItemId(R.id.nav_menu);
                         break;
                     case R.id.drawer_nav_order:
                         fragment = new OrdersFragment();
+                        bottomNavigationView.setSelectedItemId(R.id.nav_orders);
                         break;
                     case R.id.drawer_nav_logout:
                         fragment = new OrdersFragment();
@@ -148,6 +155,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //////////////////////////////////////////////////////
+
 
     /**
      * Going to Login Activity

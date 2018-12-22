@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout 
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="20dp"
+    android:padding="20dp"
+    android:background="#E8E8E8"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/fragment_profile_top"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -17,24 +21,118 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:elevation="12dp"
-            android:id="@+id/view2"
             app:cardCornerRadius="80dp"
             android:innerRadius="0dp"
             android:shape="ring"
             android:thicknessRatio="1.9"
             tools:targetApi="lollipop">
             <ImageView
-                android:layout_height="160dp"
+                android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:id="@+id/imageView1"
                 app:srcCompat="@drawable/placeholder_man"
                 android:scaleType="centerCrop"
-                android:contentDescription="@string/profile_image">
-            </ImageView>
+                android:contentDescription="@string/profile_image" />
         </android.support.v7.widget.CardView>
-        
-        
+        <TextView
+            android:id="@+id/fragment_profile_full_name"
+            android:text="Full Name"
+            android:textSize="20sp"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/fragment_profile_username"
+            android:text="Username"
+            android:textSize="20sp"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_profile_layout_phone"
+        android:layout_below="@+id/fragment_profile_top"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            app:srcCompat="@drawable/ic_profile_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/fragment_profile_phone"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:text="Phone"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_profile_layout_email"
+        android:layout_below="@+id/fragment_profile_layout_phone"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            app:srcCompat="@drawable/ic_profile_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/fragment_profile_email"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:text="Email"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_profile_layout_web"
+        android:layout_below="@+id/fragment_profile_layout_email"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            app:srcCompat="@drawable/ic_profile_web"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/fragment_profile_web"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:text="Website"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_profile_layout_orders"
+        android:layout_below="@+id/fragment_profile_layout_web"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            app:srcCompat="@drawable/ic_profile_orders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/fragment_profile_orders"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:text="Website"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
