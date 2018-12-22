@@ -1,6 +1,6 @@
 package e.acer_aspire.fooddeliveryservice.inactive;
 
-public class Meals {
+public class Meal {
 
     private int id;
     private String name;
@@ -12,7 +12,7 @@ public class Meals {
     private Restaurants restaurant;
     private Reviews review;
 
-    public Meals(int id, String name, String description, String ingredients, float price, int restaurant_id, Restaurants restaurant, Reviews review) {
+    public Meal(int id, String name, String description, String ingredients, float price, int restaurant_id, Restaurants restaurant, Reviews review) {
         this.id = id;
         this.name = name;
         this.description = description;

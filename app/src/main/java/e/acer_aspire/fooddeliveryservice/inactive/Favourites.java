@@ -4,7 +4,7 @@ public class Favourites {
     private int user_id;
     private int meal_id;
 
-    private Meals meal;
+    private Meal meal;
     private User user;
 
     public Favourites(int user_id, int meal_id) {
@@ -24,7 +24,7 @@ public class Favourites {
         return user;
     }
 
-    public Meals getMeal() {
+    public Meal getMeal() {
         return meal;
     }
 }

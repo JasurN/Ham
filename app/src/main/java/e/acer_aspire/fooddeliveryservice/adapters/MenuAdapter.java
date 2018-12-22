@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import e.acer_aspire.fooddeliveryservice.R;
-import e.acer_aspire.fooddeliveryservice.models.Meals;
+import e.acer_aspire.fooddeliveryservice.models.Meal;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
 
     private Context context;
-    private ArrayList<Meals>meals;
+    private ArrayList<Meal>meals;
 
-    public MenuAdapter(Context context, int resource, ArrayList<Meals>meals) {
+    public MenuAdapter(Context context, int resource, ArrayList<Meal>meals) {
 
     }
 

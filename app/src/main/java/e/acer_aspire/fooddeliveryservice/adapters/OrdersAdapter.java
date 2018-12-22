@@ -16,7 +16,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import e.acer_aspire.fooddeliveryservice.R;
-import e.acer_aspire.fooddeliveryservice.models.Orders;
+import e.acer_aspire.fooddeliveryservice.inactive.Orders;
+import e.acer_aspire.fooddeliveryservice.models.Order;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder> {
     private Context context;

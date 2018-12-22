@@ -14,13 +14,13 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import e.acer_aspire.fooddeliveryservice.R;
-import e.acer_aspire.fooddeliveryservice.models.Meals;
+import e.acer_aspire.fooddeliveryservice.models.Meal;
 
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MainViewHolder> {
     private Context context;
-    private ArrayList<Meals> meals;
+    private ArrayList<Meal> meals;
 
-    public FavouriteAdapter(Context context, ArrayList<Meals>meals) {
+    public FavouriteAdapter(Context context, ArrayList<Meal>meals) {
         this.context = context;
         this.meals = meals;
     }
@@ -35,7 +35,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Main
 
     @Override
     public void onBindViewHolder(@NonNull FavouriteAdapter.MainViewHolder holder, int position) {
-        Meals meal = meals.get(position);
+        Meal meal = meals.get(position);
         holder.setDetails(meal);
     }
 
@@ -57,9 +57,9 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Main
             this.view = itemView;
         }
 
-        public void setDetails(Meals meal) {
-            rating.setRating(meal.getReview().getRating());
-            namePrice.setText(meal.getNamePrice());
+        public void setDetails(Meal meal) {
+            rating.setRating(meal.getRating());
+            namePrice.setText(String.valueOf(meal.getPrice()));
             description.setText(meal.getDescription());
 //            cardView.setBackground();
         }

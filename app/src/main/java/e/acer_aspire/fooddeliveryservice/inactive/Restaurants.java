@@ -10,9 +10,9 @@ public class Restaurants {
     private String location;
     private float rating;
 
-    private ArrayList<Meals> meals;
+    private ArrayList<Meal> meals;
 
-    public Restaurants(int id, String name, String address, String location, float rating, ArrayList<Meals> meals) {
+    public Restaurants(int id, String name, String address, String location, float rating, ArrayList<Meal> meals) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -41,7 +41,7 @@ public class Restaurants {
         return rating;
     }
 
-    public ArrayList<Meals> getMeals() {
+    public ArrayList<Meal> getMeals() {
         return meals;
     }
 }

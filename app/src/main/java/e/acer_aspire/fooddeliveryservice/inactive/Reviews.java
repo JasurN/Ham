@@ -8,9 +8,9 @@ public class Reviews {
     private String review;
 
     private User user;
-    private Meals meal;
+    private Meal meal;
 
-    public Reviews(int user_id, int meal_id, float rating, String review, User user, Meals meal) {
+    public Reviews(int user_id, int meal_id, float rating, String review, User user, Meal meal) {
         this.user_id = user_id;
         this.meal_id = meal_id;
         this.rating = rating;
@@ -39,7 +39,7 @@ public class Reviews {
         return user;
     }
 
-    public Meals getMeal() {
+    public Meal getMeal() {
         return meal;
     }
 }

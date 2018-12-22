@@ -8,15 +8,12 @@ package e.acer_aspire.fooddeliveryservice;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -61,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
          */
         setupDrawerContent(navigationView);
         navigationView.getMenu().getItem(navIndex[0]).setChecked(true);
-        /** Set item select listener for BottomNavigationView */
+        /**
+          Set item select listener for BottomNavigationView */
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomItemSelected);
     }
 

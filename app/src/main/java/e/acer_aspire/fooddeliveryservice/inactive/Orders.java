@@ -11,9 +11,9 @@ public class Orders {
     private int status;
 
     private User user;
-    private Meals meal;
+    private Meal meal;
 
-    public Orders(int id, int user_id, int meal_id, float amount, String destination, String time, int arrived_at, int status, User user, Meals meal) {
+    public Orders(int id, int user_id, int meal_id, float amount, String destination, String time, int arrived_at, int status, User user, Meal meal) {
         this.id = id;
         this.user_id = user_id;
         this.meal_id = meal_id;
@@ -62,7 +62,7 @@ public class Orders {
         return user;
     }
 
-    public Meals getMeal() {
+    public Meal getMeal() {
         return meal;
     }
 }
