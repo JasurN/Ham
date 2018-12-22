@@ -88,7 +88,6 @@ public class SignupActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
-        String reEnterPassword = _reEnterPasswordText.getText().toString();
 
         // TODO: Database setup for user
         signUpFirebase(email, password);
