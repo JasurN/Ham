@@ -50,6 +50,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+        //if your have already account he goes to login activity
         _loginLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +79,7 @@ public class SignupActivity extends AppCompatActivity {
 
         _signupButton.setEnabled(false);
 
+        //info with creating account
         final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
@@ -90,7 +92,10 @@ public class SignupActivity extends AppCompatActivity {
         String phoneNumber = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        signUpFirebaseAuth(email, password);
+        //Here we SignUp to FireBase Auth
+        signUpFireBaseAuth(email, password);
+
+        //Here we SignUp to FireBase Real-Time Database
         Database database = new Database();
         database.signUpNewUser(email, 1, name, address, phoneNumber);
         //TODO: create admin user how?
@@ -103,7 +108,7 @@ public class SignupActivity extends AppCompatActivity {
                 }, 2000);
     }
 
-
+    //if SignUp succeed
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         Intent resultIntent = new Intent();
@@ -120,6 +125,7 @@ public class SignupActivity extends AppCompatActivity {
         _signupButton.setEnabled(true);
     }
 
+    //Validating user for correct inputs
     public boolean validate() {
         boolean valid = true;
 
@@ -176,7 +182,8 @@ public class SignupActivity extends AppCompatActivity {
         return valid;
     }
 
-    private void signUpFirebaseAuth(final String user_email, String password) {
+    //SignUp to FireBase Auth
+    private void signUpFireBaseAuth(final String user_email, String password) {
         mAuth.createUserWithEmailAndPassword(user_email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

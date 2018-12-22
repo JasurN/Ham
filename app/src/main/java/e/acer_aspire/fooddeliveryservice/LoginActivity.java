@@ -37,9 +37,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
+
+        // Connecting with FireBase Auth
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
+        //It will go to Main directly if user alders login previously
         if(currentUser != null) {
             onLoginSuccess();
         }
@@ -56,7 +59,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // Start the Signup activity
+                // Start the Signup activity and waiting for success result.
+                // If he did sign up it goes to main
                 Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
                 finish();
@@ -78,10 +82,10 @@ public class LoginActivity extends AppCompatActivity {
 
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
-        loginFirebase(email, password);
+        loginFireBase(email, password);
     }
 
-
+    //This delay between going to main menu
     void delay(boolean isSucess) {
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
@@ -93,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
             new android.os.Handler().postDelayed(
                     new Runnable() {
                         public void run() {
-                            // On complete call either onLoginSuccess or onLoginFailed
+                            // On complete call
                             onLoginSuccess();
                             // onLoginFailed();
                             progressDialog.dismiss();
@@ -114,10 +118,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendEmailToParentActivity() {
+        //put email of login user for main activity
         Intent resultEmail = new Intent();
         setResult(RESULT_OK,  resultEmail);
 
-        // By default we just finish the Activity and log them in automatically
         this.finish();
     }
 
@@ -129,7 +133,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-
     @Override
     public void onBackPressed() {
         // Disable going back to the MainActivity
@@ -140,17 +143,19 @@ public class LoginActivity extends AppCompatActivity {
         _loginButton.setEnabled(true);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
+            //we identify what is users email
             sendEmailToParentActivity();
         }
 
     }
 
+    //if there was error on login phase or couldn't pass validation
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         _loginButton.setEnabled(true);
     }
 
+    //validating for correct email and password
     public boolean validate() {
         boolean valid = true;
 
@@ -174,8 +179,10 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
-    private void loginFirebase(String email, String password) {
-        Log.d(TAG, "loginFirebase:" + email);
+    //here we are login to FireBase and put listener
+    //according to listener we go further
+    private void loginFireBase(String email, String password) {
+        Log.d(TAG, "loginFireBase:" + email);
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
