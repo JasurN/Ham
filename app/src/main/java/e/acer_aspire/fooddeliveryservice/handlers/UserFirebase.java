@@ -1,4 +1,4 @@
-package e.acer_aspire.fooddeliveryservice.database;
+package e.acer_aspire.fooddeliveryservice.handlers;
 
 import com.google.firebase.database.Exclude;
 

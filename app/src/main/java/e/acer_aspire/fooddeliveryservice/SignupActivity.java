@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import e.acer_aspire.fooddeliveryservice.database.DatabaseHandler;
+import e.acer_aspire.fooddeliveryservice.handlers.DatabaseHandler;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";

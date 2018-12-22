@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import e.acer_aspire.fooddeliveryservice.adapters.ViewPagerAdapter;
-import e.acer_aspire.fooddeliveryservice.database.DatabaseHandler;
+import e.acer_aspire.fooddeliveryservice.handlers.DatabaseHandler;
 import e.acer_aspire.fooddeliveryservice.fragments.MainFragment;
 import e.acer_aspire.fooddeliveryservice.fragments.MenuFragment;
 import e.acer_aspire.fooddeliveryservice.fragments.OrdersFragment;
