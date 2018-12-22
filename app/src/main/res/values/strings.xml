@@ -14,9 +14,12 @@
     <string name="approved">Approved</string>
     <string name="rejected">Rejected</string>
     <string name="price">Price:</string>
+    <string name="price1">Price</string>
     <string name="amount">Amount:</string>
     <string name="total_price">Total Price:</string>
     <string name="date">Date:</string>
+    <string name="description">Description</string>
+    <string name="ingredients">Ingredients</string>
     <string name="sign_out">Sign Out</string>
     <string name="profile_image">Profile Image</string>
 </resources>
