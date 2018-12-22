@@ -17,4 +17,6 @@
     <string name="amount">Amount:</string>
     <string name="total_price">Total Price:</string>
     <string name="date">Date:</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="profile_image">Profile Image</string>
 </resources>

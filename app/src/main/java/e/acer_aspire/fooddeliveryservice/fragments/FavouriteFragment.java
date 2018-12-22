@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import e.acer_aspire.fooddeliveryservice.R;
 
-public class MainFragment extends Fragment {
+public class FavouriteFragment extends Fragment {
 
     @BindView(R.id.main_recycler_view) RecyclerView recyclerView;
 

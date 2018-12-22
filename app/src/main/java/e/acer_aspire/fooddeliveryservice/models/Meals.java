@@ -39,8 +39,8 @@ public class Meals {
         return ingredients;
     }
 
-    public String getPrice() {
-        return price + " sum";
+    public float getPrice() {
+        return price;
     }
 
     public int getRestaurantId() {

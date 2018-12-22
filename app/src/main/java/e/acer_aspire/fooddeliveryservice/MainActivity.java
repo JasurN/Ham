@@ -13,7 +13,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -25,8 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import e.acer_aspire.fooddeliveryservice.adapters.ViewPagerAdapter;
-import e.acer_aspire.fooddeliveryservice.fragments.MainFragment;
+import e.acer_aspire.fooddeliveryservice.fragments.FavouriteFragment;
 import e.acer_aspire.fooddeliveryservice.fragments.MenuFragment;
 import e.acer_aspire.fooddeliveryservice.fragments.OrdersFragment;
 import e.acer_aspire.fooddeliveryservice.fragments.ProfileFragment;
@@ -36,21 +34,18 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = "myLogs";
 
     // For DrawerLayout which is in activity_main
-    @BindView(R.id.nav_view) NavigationView navView;
+    @BindView(R.id.nav_view)
+    NavigationView navView;
     // For Navigation view
-    @BindView(R.id.main_drawer_layout) DrawerLayout drawerLayout;
+    @BindView(R.id.main_drawer_layout)
+    DrawerLayout drawerLayout;
     // For View pager (used to swap between bottom navigation view)
 //    @Bind(R.id.tab_toolbar) Toolbar mToolBar;
     // Bottom navigation view which is used to change fragments like main, menu, orders and profile
-    @BindView(R.id.main_navigation) BottomNavigationView bottomNavigationView;
+    @BindView(R.id.main_navigation)
+    BottomNavigationView bottomNavigationView;
 
     private static final int REQUEST_LOGIN = 1;
-    private final Fragment mainFragment = new MainFragment();
-    private final Fragment menuFragment = new MenuFragment();
-    private final Fragment ordersFragment = new OrdersFragment();
-    private final Fragment profileFragment = new ProfileFragment();
-    private final FragmentManager fm = getSupportFragmentManager();
-    private Fragment active;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,41 +55,16 @@ public class MainActivity extends AppCompatActivity {
         makeLoginOrSignUp();
         // Bind all attributes with resource ids
         ButterKnife.bind(this);
-
-        init();
-        setupFragments();
-    /**
-     * Initialization function which configures view
-     * and set necessary parameters
-     */
-
-    }
-
-
-
-    private void init() {
-        /*  Sets action bar to the app,
-            that is needed to call navigation view.
-            In application situated in upfront
-         */
-        /*setSupportActionBar(mToolBar);
-        final ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }*/
+        loadFragment(new MenuFragment());
         /** If Navigation view is not drawn
          *  then draw, else do not draw
          */
         if (navView != null) {
             setupDrawerContent(navView);
         }
-
+        /** Set item select listener for BottomNavigationView */
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomItemSelected);
-//        bottomNavigationView.
-
     }
-
 
     ////////////////////////////////////////////////////// Navigation View
 
@@ -102,57 +72,79 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener bottomItemSelected = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment = null;
             switch (item.getItemId()) {
-                case R.id.nav_main:
-                    fm.beginTransaction().hide(active).show(mainFragment).commit();
-                    active = mainFragment;
+                case R.id.nav_favourites:
+                    fragment = new FavouriteFragment();
                     Toast.makeText(MainActivity.this, "Navigation Main", Toast.LENGTH_SHORT).show();
-                    return true;
+                    break;
                 case R.id.nav_menu:
-                    fm.beginTransaction().hide(active).show(menuFragment).commit();
-                    active = menuFragment;
+                    fragment = new MenuFragment();
                     Toast.makeText(MainActivity.this, "Navigation Menu", Toast.LENGTH_SHORT).show();
-                    return true;
+                    break;
                 case R.id.nav_orders:
-                    fm.beginTransaction().hide(active).show(ordersFragment).commit();
-                    active = ordersFragment;
+                    fragment = new OrdersFragment();
                     Toast.makeText(MainActivity.this, "Navigation Orders", Toast.LENGTH_SHORT).show();
-                    return true;
+                    break;
                 case R.id.nav_profile:
-                    fm.beginTransaction().hide(active).show(profileFragment).commit();
-                    active = profileFragment;
+                    fragment = new ProfileFragment();
                     Toast.makeText(MainActivity.this, "Navigation Profile", Toast.LENGTH_SHORT).show();
-                    return true;
+                    break;
             }
-            return false;
+            return loadFragment(fragment);
         }
     };
 
     /**
-     * Adds fragment to the fragment manager
+     * Loads selected fragment.
+     * It can be selected via NavigationView,
+     * or BottomNavigationView.
+     *
+     * @param fragment Fragment
+     * @return boolean
      */
-    private void setupFragments() {
-        fm.beginTransaction().add(R.id.main_content_list, mainFragment, "Main").commit();
-        fm.beginTransaction().add(R.id.main_content_list, menuFragment, "Menu").hide(menuFragment).commit();
-        fm.beginTransaction().add(R.id.main_content_list, ordersFragment, "Orders").hide(ordersFragment).commit();
-        fm.beginTransaction().add(R.id.main_content_list, profileFragment, "Profile").hide(profileFragment).commit();
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
     }
+
 
     /**
      * Function to take action when chosen navigation view
+     *
      * @param navigationView NavigationView
      */
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment = null;
                 item.setChecked(true);
                 switch (item.getItemId()) {
                     case R.id.drawer_nav_profile:
+                        fragment = new ProfileFragment();
+                        break;
+                    case R.id.drawer_nav_favourite:
+                        fragment = new FavouriteFragment();
+                        break;
+                    case R.id.drawer_nav_meals:
+                        fragment = new MenuFragment();
+                        break;
+                    case R.id.drawer_nav_order:
+                        fragment = new OrdersFragment();
+                        break;
+                    case R.id.drawer_nav_logout:
+                        fragment = new OrdersFragment();
                         break;
                 }
                 drawerLayout.closeDrawers();
-                return true;
+                return loadFragment(fragment);
             }
         });
     }
@@ -160,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Going to Login Activity
      * User should be initialized in order to use application
+     *
      * @onActivityResult function checks it
      */
     private void makeLoginOrSignUp() {

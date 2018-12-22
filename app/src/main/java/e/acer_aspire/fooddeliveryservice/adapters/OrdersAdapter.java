@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import e.acer_aspire.fooddeliveryservice.R;
-import e.acer_aspire.fooddeliveryservice.models.Meals;
 import e.acer_aspire.fooddeliveryservice.models.Orders;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder> {
@@ -39,7 +38,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
     @Override
     public void onBindViewHolder(@NonNull OrdersAdapter.OrdersViewHolder holder, int position) {
         Orders order = orders.get(position);
-        holder.setDetails(order);
+        holder.setDetails(order, context);
     }
 
     @Override
@@ -63,16 +62,31 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
             this.view = itemView;
         }
 
-        public void setDetails(Orders orders) {
-            meal_name.setText(orders.getMeal().getName());
-            price.setText(orders.getMeal().getPrice());
-            amount.setText(orders.getAmount() + "");
-            date.setText(orders.getTime());
-            rating.setRating(orders.getMeal().getReview().getRating());
-//            switch (orders.getStatus()) {
-//                case 0:
-//                    status.setColorFilter(ContextCompat.getColor(context));
-//            }
+        /**
+         * This method set details of order and rating of meal
+         * and background of cardView.
+         * @param order Orders
+         * @param context Context
+         */
+        public void setDetails(Orders order, Context context) {
+            double finalPrice = order.getAmount() * order.getMeal().getPrice();
+            meal_name.setText(order.getMeal().getName());
+            price.setText(order.getMeal().getPrice() + "");
+            amount.setText(order.getAmount() + "");
+            totalPrice.setText(finalPrice + "");
+            date.setText(order.getTime());
+            rating.setRating(order.getMeal().getReview().getRating());
+            switch (order.getStatus()) {
+                case 0:
+                    status.setColorFilter(ContextCompat.getColor(context, R.color.rejected));
+                    break;
+                case 1:
+                    status.setColorFilter(ContextCompat.getColor(context, R.color.waiting));
+                    break;
+                case 2:
+                    status.setColorFilter(ContextCompat.getColor(context, R.color.approved));
+                    break;
+            }
 //            cardView.setBackground();
         }
     }
