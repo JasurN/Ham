@@ -1,11 +1,11 @@
-package e.acer_aspire.fooddeliveryservice.handlers;
+package e.acer_aspire.fooddeliveryservice.models;
 
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MealFirebase {
+public class Meal {
     private String id;
     private String name;
     private String description;
@@ -13,11 +13,11 @@ public class MealFirebase {
     private float rating;
     private float price;
 
-    public MealFirebase() {
+    public Meal() {
 
     }
 
-    public MealFirebase(String id,String name, String description, String ingredients, float price) {
+    public Meal(String id, String name, String description, String ingredients, float price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -73,6 +73,9 @@ public class MealFirebase {
         this.price = price;
     }
 
+    /**
+     * Making model for adding to database as Object
+     */
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();

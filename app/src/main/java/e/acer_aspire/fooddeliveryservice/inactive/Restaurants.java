@@ -1,4 +1,4 @@
-package e.acer_aspire.fooddeliveryservice.models;
+package e.acer_aspire.fooddeliveryservice.inactive;
 
 import java.util.ArrayList;
 

@@ -1,77 +1,66 @@
 package e.acer_aspire.fooddeliveryservice.models;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
 
-    private int id;
-    private String username;
+    private String id;
     private String email;
-    private int type;
-    private int created_at;
-    private int updated_at;
+    private int type; //see Defined_Values.java in helper package for user types
+    private Map created_at;
 
-    private Profile profile;
-    private Favourites favourites;
-    private Reviews reviews;
-    private Orders orders;
-
-    public User(int id, String username, String email, int type, int created_at, int updated_at, Profile profile, Favourites favourites, Reviews reviews, Orders orders) {
+    public User(String id, String email, int type, Map created_at) {
         this.id = id;
-        this.username = username;
         this.email = email;
         this.type = type;
         this.created_at = created_at;
-        this.updated_at = updated_at;
-        this.profile = profile;
-        this.favourites = favourites;
-        this.reviews = reviews;
-        this.orders = orders;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int getType() {
         return type;
     }
 
-    public int getCreatedAt() {
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public Map getCreated_at() {
         return created_at;
     }
 
-    public int getUpdatedAt() {
-        return updated_at;
+    public void setCreated_at(Map created_at) {
+        this.created_at = created_at;
     }
 
-    public Profile getProfile() {
-        return profile;
-    }
-
-    public Favourites getFavourites() {
-        return favourites;
-    }
-
-    public Reviews getReviews() {
-        return reviews;
-    }
-
-    public Orders getOrders() {
-        return orders;
-    }
-
-    public void userSignOut() {
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            FirebaseAuth.getInstance().signOut();
-        }
+    /**
+     * Making model for adding to database as Object
+     */
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("id", id);
+        result.put("email", email);
+        result.put("type", type);
+        result.put("created_at", created_at);
+        return result;
     }
 }

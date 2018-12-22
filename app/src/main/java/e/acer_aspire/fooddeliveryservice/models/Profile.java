@@ -1,69 +1,54 @@
 package e.acer_aspire.fooddeliveryservice.models;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Profile {
-
-    private int user_id;
-    private String first_name;
-    private String middle_name;
-    private String last_name;
-    private int birth_date;
+    private String name;
     private String address;
-    private String bio;
-    private String phone;
-    private String website;
+    private String phoneNumber;
 
-    private User user;
-
-    public Profile(int user_id, String first_name, String middle_name, String last_name, int birth_date, String address, String bio, String phone, String website, User user) {
-        this.user_id = user_id;
-        this.first_name = first_name;
-        this.middle_name = middle_name;
-        this.last_name = last_name;
-        this.birth_date = birth_date;
+    public Profile(String name, String address, String phoneNumber) {
+        this.name = name;
         this.address = address;
-        this.bio = bio;
-        this.phone = phone;
-        this.website = website;
-        this.user = user;
+        this.phoneNumber = phoneNumber;
     }
 
-    public int getUserId() {
-        return user_id;
+    public String getName() {
+        return name;
     }
 
-    public String getFirstName() {
-        return first_name;
-    }
-
-    public String getMiddleName() {
-        return middle_name;
-    }
-
-    public String getLastName() {
-        return last_name;
-    }
-
-    public int getBirthDate() {
-        return birth_date;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public String getBio() {
-        return bio;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public String getWebsite() {
-        return website;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public User getUser() {
-        return user;
+    /**
+     * Making model for adding to database as Object
+     */
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("name", name);
+        result.put("address", address);
+        result.put("phoneNumber", phoneNumber);
+        return result;
     }
 }

@@ -1,11 +1,11 @@
-package e.acer_aspire.fooddeliveryservice.handlers;
+package e.acer_aspire.fooddeliveryservice.models;
 
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class OrderFirebase {
+public class Order {
     private String id;
     private String meal_id;
     private String user_id;
@@ -14,9 +14,9 @@ public class OrderFirebase {
     private int status; //see Defined_Values.java in helper package for statuses
     private Map created_at;
 
-    public OrderFirebase(String id, String meal_id, String user_id,
-                         float amount, String destination_address,
-                         int status, Map created_at) {
+    public Order(String id, String meal_id, String user_id,
+                 float amount, String destination_address,
+                 int status, Map created_at) {
         this.id = id;
         this.meal_id = meal_id;
         this.user_id = user_id;
@@ -78,6 +78,9 @@ public class OrderFirebase {
         this.status = status;
     }
 
+    /**
+     * Making model for adding to database as Object
+     */
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();

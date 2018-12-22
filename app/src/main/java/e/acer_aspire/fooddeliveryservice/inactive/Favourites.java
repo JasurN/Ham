@@ -1,4 +1,4 @@
-package e.acer_aspire.fooddeliveryservice.models;
+package e.acer_aspire.fooddeliveryservice.inactive;
 
 public class Favourites {
     private int user_id;
